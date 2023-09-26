@@ -12,7 +12,7 @@ Welcome to the TotlityCorp E-commerce website project. This is an intermediate-l
 
 ## Demo
 
-You can see a live demo of the project [here](#https://totalitycorp-frontend-challenge-blond.vercel.app/).
+You can see a live demo of the project here: https://totalitycorp-frontend-challenge-blond.vercel.app
 
 ## Features
 
