@@ -46,6 +46,20 @@ const Cart = () => {
       }),
     };
     console.log(addressInfo);
+
+    const orderInfo = {
+      cartItems,
+      addressInfo,
+      date: new Date().toLocaleString("en-US", {
+        month: "short",
+        day: "2-digit",
+        year: "numeric",
+      }),
+      email: JSON.parse(localStorage.getItem("user")).user.email,
+      userid: JSON.parse(localStorage.getItem("user")).user.uid,
+    };
+
+    const result = addDoc(collection(fireDb, "orders"), orderInfo);
   };
 
   const deleteCart = (item) => {

@@ -255,11 +255,11 @@ const Navbar = () => {
                     </a>
                   ) : (
                     <Link
-                      to="/signup"
+                      to="/login"
                       className="text-sm font-medium text-gray-700 cursor-pointer  "
                       style={{ color: mode === "dark" ? "white" : "" }}
                     >
-                      Signup
+                      Login
                     </Link>
                   )}
                 </div>
