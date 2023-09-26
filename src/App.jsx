@@ -1,35 +1,107 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from "react";
+import "./App.css";
+import Navbar from "./components/navbar/Navbar";
+import Footer from "./components/footer/Footer";
+import { Outlet, createBrowserRouter } from "react-router-dom";
+import NoPage from "./pages/nopage/NoPage";
+import Home from "./pages/home/Home";
+import Order from "./pages/order/Order";
+import Cart from "./pages/cart/Cart";
+import Dashboard from "./pages/admin/dashboard/Dashboard";
+import MyState from "./context/data/myState";
+import AllProducts from "./pages/allproducts/AllProducts";
+import Login from "./pages/registration/Login";
+import Signup from "./pages/registration/Signup";
+import AddProduct from "./pages/admin/pages/AddProduct";
+import UppdateProduct from "./pages/admin/pages/UppdateProduct";
+import { ProtectedRoutesForAdmin } from "./routes/ProtectedRoutesForAdmin";
+import ProtectedRoutes from "./routes/ProtectedRoutes";
+import ProductInfo from "./pages/productInfo/ProductInfo";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <MyState>
+        {/* MyState is provide the context to the whole app */}
+        <Navbar />
+        <Outlet />
+        {/* use outlet bcz all the childreen of App component will show here.
+       Navbar and Footer will be constant  */}
+        <Footer />
+      </MyState>
     </>
-  )
+  );
 }
+// i'm using react router dom version 6.4
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    errorElement: <NoPage />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/productinfo/:id",
+        element: <ProductInfo />,
+      },
+      {
+        path: "allproducts",
+        element: <AllProducts />,
+      },
+    ],
+  },
+  
+  {
+    path: "cart",
+    element: (
+      <ProtectedRoutes>
+        <Cart />
+      </ProtectedRoutes>
+    ),
+  },
+  {
+    path: "order",
+    element: (
+      <ProtectedRoutes>
+        <Order />
+      </ProtectedRoutes>
+    ),
+  },
+  {
+    path: "dashboard",
+    element: (
+      <ProtectedRoutesForAdmin>
+        <Dashboard />
+      </ProtectedRoutesForAdmin>
+    ),
+  },
+  {
+    path: "login",
+    element: <Login />,
+  },
+  {
+    path: "signup",
+    element: <Signup />,
+  },
+  {
+    path: "addproduct",
+    element: (
+      <ProtectedRoutesForAdmin>
+        <AddProduct />
+      </ProtectedRoutesForAdmin>
+    ),
+  },
+  {
+    path: "updateproduct",
+    element: (
+      <ProtectedRoutesForAdmin>
+        <UppdateProduct />
+      </ProtectedRoutesForAdmin>
+    ),
+  },
+]);
 
-export default App
+export default router;
