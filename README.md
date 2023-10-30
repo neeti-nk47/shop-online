@@ -1,4 +1,4 @@
-# TotlityCorp E-commerce Website
+# E-commerce Website
 
 Welcome to the TotlityCorp E-commerce website project. This is an intermediate-level e-commerce website built with Vite + React.js, and Tailwind CSS. It features user authentication using Firebase, real-time cart updates, and admin capabilities for product management.
 
